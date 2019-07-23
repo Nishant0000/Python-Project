@@ -1,0 +1,61 @@
+import numpy as np
+import pandas as pd
+a=pd.read_excel('dummy.xlsx')
+from datetime import date
+today = date.today()
+to=list(a[a['Date']<today]['Email'])
+to
+
+
+import imaplib
+import email
+# Connect to imap server
+username = 'nishantkapoor1234@outlook.com'
+password = 'Nishant@1234'
+mail = imaplib.IMAP4_SSL('outlook.office365.com')
+mail.login(username, password)
+
+
+# retrieve a list of the mailboxes and select one
+result, mailboxes = mail.list()
+mail.select("inbox")
+for j in range(len(to)):
+    type, data = mail.search(None, 'FROM', to[j])
+    mail_ids = data[0]
+    id_list = mail_ids.split()
+    for num in data[0].split():
+        typ, data = mail.fetch(num, '(RFC822)' )
+        raw_email = data[0][1]
+        # converts byte literal to string removing b''
+        raw_email_string = raw_email.decode('utf-8')
+        email_message = email.message_from_string(raw_email_string)
+    if(len(data)>1):
+        for response_part in data:
+            if isinstance(response_part, tuple):
+                msg = email.message_from_string(response_part[1].decode('utf-8'))
+                email_subject = msg['subject']
+                email_from = msg['from']
+                print ('From : ' + email_from + '\n')
+                print ('Subject : ' + email_subject + '\n')
+                while msg.is_multipart():
+                    msg = msg.get_payload(0)
+                    content = msg.get_payload(decode=True)
+                print(content)
+                
+abc=content.decode()               
+
+import nltk
+nltk.download('punkt')
+
+stopwords = ['what','from','Sent','a','at','is','he','Outlook','Outlook<http://aka.ms/weboutlook>']
+querywords = abc.split()
+resultwords  = [word for word in querywords if word not in stopwords]
+result = ' '.join(resultwords)
+print(result)
+
+from nltk.tokenize import word_tokenize
+tokenized_text=word_tokenize(result)
+print(tokenized_text)
+
+b=pd.read_excel('newpro.xlsx')
+from sklearn.model_selection import train_test_split
