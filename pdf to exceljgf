@@ -1,0 +1,44 @@
+
+import pandas as pd
+import PyPDF2
+import numpy as np
+import PyPDF2
+# pdf file object
+# you can find find the pdf file with complete code in below
+pdfFileObj = open('boarding pass.pdf', 'rb')
+# pdf reader object
+pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+# number of pages in pdf
+print(pdfReader.numPages)
+# a page object
+pageObj = pdfReader.getPage(0)
+# extracting text from page.
+# this will print the text you can also save that into String
+print(pageObj.extractText())
+import tabula
+
+# readinf the PDF file that contain Table Data
+# you can find find the pdf file with complete code in below
+# read_pdf will save the pdf table into Pandas Dataframe
+df = tabula.read_pdf("boarding pass.pdf",multiple_tables=True)
+
+# in order to print first 5 lines of Table
+df.head()
+tabula.convert_into("boarding pass.pdf", "offense_testing.xlsx", output_format="xlsx")
+
+
+import PyPDF2
+
+PDFfilename = "Admission Status.pdf" #filename of your PDF/directory where your PDF is stored
+
+pfr = PyPDF2.PdfFileReader(open("Admission Status.pdf", "rb")) #PdfFileReader object
+
+pg4 = pfr.getPage(0) #extract pg 127
+
+writer = PyPDF2.PdfFileWriter() #create PdfFileWriter object
+#add pages
+writer.addPage(pg4)
+                                                                                                                 
+NewPDFfilename = "jknk.xlsx" #filename of your PDF/directory where you want your new PDF to be
+with open(NewPDFfilename, "wb") as outputStream:
+    writer.write(outputStream) #write pages to new PDF
