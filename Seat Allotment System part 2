@@ -1,0 +1,79 @@
+#AUDITORIUM SEATING
+
+package aeizona;
+import java.util.*;
+public class AuditoriumSeating {
+
+	int ro,co; 
+	Guest seating[][];
+	public
+	AuditoriumSeating(int rowNum, int columnNum) 
+	{
+	        ro=rowNum;
+	        co=columnNum;
+	        seating= new Guest[rowNum][columnNum];
+	        for (int r = 0; r < rowNum; r++)
+	        {
+	            for (int c = 0; c < columnNum; c++)
+	            {
+	                Guest g = new Guest();
+	                seating[r][c] = g;
+	            }
+	        }
+	}
+
+	private Guest getGuestAt (int row, int col) 
+	{
+	return seating[row][col];
+	}
+
+	public boolean assignGuestAt (int row, int col, Guest tempGuest) 
+	{
+	if(seating[row][col].getLastName()=="???"&&seating[row][col].getFirstName()=="???")
+	        {
+	            seating[row][col]=tempGuest;
+	            return true;
+	        }
+	        else
+	        {
+	            return false;
+	        }
+	    
+	}
+
+	public boolean checkBoundaries (int row, int col) 
+	{
+		if(row<0||col<0||row>ro||col>co)
+	        {
+	            return false;
+	        }
+	        else
+	        {
+	            return true;
+	        }
+	}
+
+	/*public String  toString( ) 
+	{
+		 for (int i = 0; i < ro; i++)
+	        {
+	            for (int j = 0; j < co; j++)
+	            {
+	                System.out.println(seating[i][j].toString());
+	            }
+	        }
+	}
+}*/
+	public void abc()
+	{
+		for(int i=0;i<ro;i++)
+		{
+			for(int j=0;j<co;j++)
+			{
+				System.out.print(seating[i][j].toString());
+			}
+			System.out.println();
+			
+		}
+	}
+}
