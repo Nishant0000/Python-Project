@@ -1,0 +1,45 @@
+#GUEST CLASS
+
+package aeizona;
+import java.util.*;
+public class Guest 
+{
+
+	public String lastName;
+	public String firstName;
+
+	public Guest ( ) 
+	{
+	lastName = "???" ;
+	firstName = "???" ;
+	}
+
+	public Guest (String guestInfo) 
+	{
+	    String fullName = guestInfo; 
+	    String[] names = fullName.split("/"); 
+	    //String[] names= guestInfo.split(“/”);
+	    firstName = names[0];
+	    lastName = names[1]; 
+	}
+
+	public String getLastName ( ) 
+	{
+	return lastName;
+	}
+
+	public String getFirstName ( ) 
+	{
+	return firstName;
+	}
+
+	public String toString ( ) 
+	{
+	String st = "";
+	    st =st+ firstName.charAt(0);
+	    st =st+ '.';
+	    st =st+ lastName.charAt(0);
+	    st =st+ '.';
+	    return st;
+	}
+}
