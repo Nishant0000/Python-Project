@@ -11,7 +11,7 @@ import imaplib
 import email
 # Connect to imap server
 username = 'nishantkapoor1234@outlook.com'
-password = 'Nishant@1234'
+password = 'gjgjh'
 mail = imaplib.IMAP4_SSL('outlook.office365.com')
 mail.login(username, password)
 
